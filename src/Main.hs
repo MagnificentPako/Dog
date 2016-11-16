@@ -1,14 +1,6 @@
 module Main where
 import System.Environment
-
-outFile :: String -> IO ()
-outFile path = do
-  cont <- readFile path
-  putStrLn cont
-  return ()
+import Control.Monad ((>=>))
 
 main :: IO ()
-main = do
-  args <- getArgs
-  mapM (outFile) args
-  return ()
+main = getArgs >>= mapM_ (readFile >=> putStrLn)
